@@ -1,0 +1,14 @@
+../Core/Src/main.c:25:6:ADC_READ	2
+../Core/Src/main.c:33:7:dtw	3
+../Core/Src/main.c:50:19:Flash_Write	4
+../Core/Src/main.c:90:6:Flash_Read	2
+../Core/Src/main.c:100:6:flatten_array	4
+../Core/Src/main.c:111:6:unflatten_array	4
+../Core/Src/main.c:143:5:main	28
+../Core/Src/main.c:360:6:HAL_GPIO_EXTI_Callback	2
+../Core/Src/main.c:368:6:SystemClock_Config	3
+../Core/Src/main.c:399:13:MX_ADC1_Init	3
+../Core/Src/main.c:427:13:MX_TIM1_Init	7
+../Core/Src/main.c:482:13:MX_TIM3_Init	6
+../Core/Src/main.c:521:13:MX_GPIO_Init	1
+../Core/Src/main.c:565:6:Error_Handler	1
