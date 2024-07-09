@@ -265,7 +265,8 @@ int main(void) {
 					l_motor = 40000;
 
 					for (int z = 0; z < 2000; z++) {
-						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor) break;
+						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor)
+							break;
 						TIM1->CCR3 = 20 * z;
 						TIM3->CCR2 = 20 * z;
 						HAL_Delay(1);
@@ -286,8 +287,30 @@ int main(void) {
 					TIM1->CCR3 = 0;
 					TIM3->CCR2 = 0;
 
-					r_motor = 0;
-					l_motor = 0;
+					HAL_Delay(3000);
+
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+
+					HAL_Delay(100);
+
+					r_motor = 30000;
+					l_motor = 30000;
+
+					for (int z = 0; z < 2000; z++) {
+						TIM1->CCR3 = 15 * z;
+						TIM3->CCR2 = 15 * z;
+						HAL_Delay(2);
+					}
+
+					TIM1->CCR3 = 0;
+					TIM3->CCR2 = 0;
+					HAL_Delay(3000);
+
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+
+					decision_index = 9;
 
 				} else if (decision_index < 6) {
 					// Right
@@ -305,12 +328,12 @@ int main(void) {
 					l_motor = 40000;
 
 					for (int z = 0; z < 2000; z++) {
-						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor) break;
+						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor)
+							break;
 						TIM1->CCR3 = 10 * z;
 						TIM3->CCR2 = 20 * z;
 						HAL_Delay(1);
 					}
-
 
 				} else if (decision_index < 8) {
 					// Left
@@ -328,11 +351,13 @@ int main(void) {
 					l_motor = 20000;
 
 					for (int z = 0; z < 2000; z++) {
-						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor) break;
+						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor)
+							break;
 						TIM3->CCR2 = 10 * z;
 						TIM1->CCR3 = 20 * z;
 						HAL_Delay(1);
 					}
+
 				} else {
 					// Stop
 					HAL_GPIO_WritePin(Forward_R_GPIO_Port, Forward_R_Pin,
