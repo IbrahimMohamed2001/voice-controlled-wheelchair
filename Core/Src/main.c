@@ -30,7 +30,7 @@ void ADC_READ(ADC_HandleTypeDef *hadc, short int *value_read) {
 	HAL_ADC_Stop(hadc);
 }
 
-float dtw(int32_t ref[NUM_FEATURES][NUM_FRAMES],
+float calculate_distance(int32_t ref[NUM_FEATURES][NUM_FRAMES],
 		int32_t test[NUM_FEATURES][NUM_FRAMES]) {
 	float total_distance = 0.0;
 	float distance;
@@ -243,7 +243,7 @@ int main(void) {
 			} else {
 				// decision making
 				for (uint8_t ref = 0; ref < NUM_REFERENCES; ref++) {
-					dist = dtw(features[ref], features[NUM_REFERENCES]);
+					dist = calculate_distance(features[ref], features[NUM_REFERENCES]);
 					if (dist < min_distance) {
 						min_distance = dist;
 						decision_index = ref;
@@ -264,11 +264,11 @@ int main(void) {
 					r_motor = 40000;
 					l_motor = 40000;
 
-					for (int z = 0; z < 2000; z++) {
+					for (int z = 0; z <= 20; z++) {
 						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor)
 							break;
-						TIM1->CCR3 = 20 * z;
-						TIM3->CCR2 = 20 * z;
+						TIM1->CCR3 = 2000 * z;
+						TIM3->CCR2 = 2000 * z;
 						HAL_Delay(1);
 					}
 
@@ -297,9 +297,9 @@ int main(void) {
 					r_motor = 30000;
 					l_motor = 30000;
 
-					for (int z = 0; z < 2000; z++) {
-						TIM1->CCR3 = 15 * z;
-						TIM3->CCR2 = 15 * z;
+					for (int z = 0; z <= 20; z++) {
+						TIM1->CCR3 = 1500 * z;
+						TIM3->CCR2 = 1500 * z;
 						HAL_Delay(2);
 					}
 
@@ -327,11 +327,11 @@ int main(void) {
 					r_motor = 20000;
 					l_motor = 40000;
 
-					for (int z = 0; z < 2000; z++) {
+					for (int z = 0; z <= 20; z++) {
 						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor)
 							break;
-						TIM1->CCR3 = 10 * z;
-						TIM3->CCR2 = 20 * z;
+						TIM1->CCR3 = 1000 * z;
+						TIM3->CCR2 = 2000 * z;
 						HAL_Delay(1);
 					}
 
@@ -350,11 +350,11 @@ int main(void) {
 					r_motor = 40000;
 					l_motor = 20000;
 
-					for (int z = 0; z < 2000; z++) {
+					for (int z = 0; z < 20; z++) {
 						if (TIM1->CCR3 == r_motor && TIM3->CCR2 == l_motor)
 							break;
-						TIM3->CCR2 = 10 * z;
-						TIM1->CCR3 = 20 * z;
+						TIM1->CCR3 = 2000 * z;
+						TIM3->CCR2 = 1000 * z;
 						HAL_Delay(1);
 					}
 
